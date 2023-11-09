@@ -4,6 +4,8 @@ import { z } from "zod";
 import { sql } from "@vercel/postgres";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { signIn } from '@/auth';
+ 
 
 // Schema that matches the shape of your form object
 const InvoiceSchema = z.object({
@@ -123,5 +125,22 @@ export async function deleteInvoice(id: string) {
     return { message: "Deleted Invoice." };
   } catch (error) {
     return { message: "Database Error: Failed to Delete Invoice." };
+  }
+}
+
+
+// The Object.fromEntries() static method transforms a list of key-value pairs into an object.
+ 
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    await signIn('credentials', Object.fromEntries(formData));
+  } catch (error) {
+    if ((error as Error).message.includes('CredentialsSignin')) {
+      return 'CredentialSignin';
+    }
+    throw error;
   }
 }
