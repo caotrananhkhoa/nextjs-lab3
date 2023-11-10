@@ -8,6 +8,12 @@ import {
   LatestInvoicesSkeleton,
   RevenueChartSkeleton,
 } from "@/app/ui/skeletons";
+import { Metadata } from "next";
+
+// Add metadata with template in Root layout
+export const metadata: Metadata = {
+  title: 'Home',
+};
 
 export default async function Page() {
   

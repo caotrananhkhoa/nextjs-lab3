@@ -6,7 +6,12 @@ import { lusitana } from "@/app/ui/fonts";
 import { InvoicesTableSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";
 import { fetchInvoicesPages } from '@/app/lib/data';
+import { Metadata } from "next";
 
+// Add metadata with template in Root layout
+export const metadata: Metadata = {
+  title: 'Invoices',
+};
 
 // { searchParams }: An object containing the search parameters of the current URL
 export default async function Page({
